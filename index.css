@@ -303,6 +303,47 @@ button:focus {
     background: rgba(0, 0, 0,0.8); 
 }
 
+#trabajoGaleria
+{
+
+    /* display: grid; 
+    gap: 10px; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    /* align-content: stretch; */
+    width: 100%;
+    background-color: rgb(141, 141, 141);
+    
+    /* grid-template-columns: auto auto auto auto; */
+}
+@media (max-width:800px){
+    #trabajoGaleria
+    {
+        flex-direction: column;
+    }
+
+}
+#trabajoItem
+{
+    display: flex; 
+    width: 50%;
+    flex-grow: 1;
+    
+
+}
+#trabajoItem div
+{
+    padding: 20px;
+    font-size: 12px;
+    background-color: #525353;
+}
+#trabajoItem img
+{
+    height: 250px;
+}
+
 @media (max-width: 1000px){
     #photos {
     columns:1;
