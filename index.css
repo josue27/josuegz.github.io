@@ -314,7 +314,7 @@ button:focus {
     /* flex-wrap: wrap; */
     /* align-content: stretch; */
     width: 100%;
-    background-color: rgb(141, 141, 141);
+    background-color: rgb(255, 255, 255);
     
     /* grid-template-columns: auto auto auto auto; */
 }
@@ -337,7 +337,7 @@ button:focus {
 {
     padding: 20px;
     font-size: 12px;
-    background-color: #525353;
+    background-color: #ffffff;
 }
 #trabajoItem img
 {
