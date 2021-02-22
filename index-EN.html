@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Josue G.Z.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="es">
+    <div id="loading">
+        <div id="spinner"></div>
+    </div>
+    <div id="magnify">
+        <h1 onclick="closemagnify()"><i class="fas fa-times"></i></h1>
+        <div id="img_here"></div>
+    </div>
+    <header id="header" class="animated slideInDown" style="animation-delay:1.8s;">
+        <table>
+            <tr>
+                <td id="logo">Josue Gonzalez Zaldivar</td>
+                <td id="navigation">
+                    <a href="#work">Work</a>
+                    <a href="#bio">About me</a>
+                    <a href="./mastrabajo.html">More Work</a>
+                    <a href="#contact">Contact</a>
+                </td>
+            </tr>
+        </table>
+    </header>
+    <table id="top_part">
+        <tr>
+            <td id="about" class="animated slideInLeft" style="animation-delay:2s;">
+                <h1>Game Designer /  Developer  </h1>
+                <button class="btn_one">Let´s talk</button><br>
+                <table>
+                    <tr>
+                        <td class="animated zoomIn" style="animation-delay:2.2s;"><a class="social" href="https://www.facebook.com/ijosuem"><i class="fab fa-facebook"></i></a></td>
+                        <td class="animated zoomIn" style="animation-delay:2.4s;"><a class="social" href="https://twitter.com/paxel27" target="blank"><i class="fab fa-twitter"></i></a></td>
+                        <td class="animated zoomIn" style="animation-delay:2.6s;"><a class="social" href="https://github.com/josue27" target="blank"><i class="fab fa-github"></i></a></td>
+                      <!--  <td class="animated zoomIn" style="animation-delay:2.8s;"><a class="social"><i class="fab fa-dribbble"></i></a></td>
+                        <td class="animated zoomIn" style="animation-delay:3.0s;"><a class="social"><i class="fab fa-medium"></i></a></td>-->
+                        
+                    </tr>
+                    <tr><iframe width="560" height="315" src="https://www.youtube.com/embed/8icNDZor60A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></tr>
+                </table>
+            </td>
+            <td id="rightImage" class="animated jackInTheBox" style="animation-delay:2.2s;"></td>
+        </tr>
+    </table>
+    <div id="bio" >
+      
+        <h1 lang="en">About me</h1>
+        <p>
+            I´m a game developer that loves to design and develop videogames and interactive apps, obviously I also like playing games. I have a bachelor degree on Engineering in Interactive Technologies from U.V.M in Mexico. Currently working in Jitzu, a small vr and ar studio that develops taylor made experiences for different companies and parks. In my free time I experiment and develp small games, mostly all by my self.
+            My abilities also include 3D Modeling, textures,rendering,riggin, 3D and 2D animation, video editing and audio. 
+            About my english I have a Cambridge F.C.E English and I am open to relocation to other parts of the world.
+        </p>
+        <div  style="display: flex; flex: auto;">
+            <div style="flex-grow: 1;">
+            <h3>GAME ENGINES</h3>
+            <li>Unity (+6 years exp.)</li>
+            <li>UE4 (+2 years exp.)</li> 
+            </div>
+            <div style="flex-grow: 1;">
+                <h3>Programming </h3>
+                <li>C#</li>
+                <li>C++</li>
+                <li>HTMLC/CSS</li>
+                <li>Javascript</li>
+                <li>Python</li>
+                <li>Cg/HLSL</li>
+                <li>THREEJS(library)</li>
+            </div>
+            <div style="flex-grow: 1;">
+                <h3>Job Experience</h3>
+                <li>Hyperlogics 2013-2014</li>
+                <li>Freelance 2014-2016</li>
+                <li>Teacher at U.V.M 2016</li> 
+                <li><a href="http://humann.mx/"> HUMANN </a>2016-2018 </li>
+                <li><a href="http://www.jitzu.mx" target="blank">JITZU</a> 2018 - today</li>
+                
+            </div>
+            <div style="flex-grow: 1;">
+                <h3>Other softwares</h3>
+                
+                <li>Git(github)</li>
+                <li>Maya</li>
+                <li>Blender</li>
+                <li>Substance Painter</li> 
+                <li>Photoshop</li>
+                <li>Illustrator</li>
+                <li>After Effects</li>
+                <li>Premier Pro</li> 
+            </div>
+        </div>
+        
+           
+    </div>
+    <div id="work">
+        <h1>Work</h1>
+        <!-- <div id="photos">
+            <img onclick="magnify($(this).attr('src'))" src="https://images.unsplash.com/photo-1547922657-b370d1687eb1?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80">
+            <img onclick="magnify($(this).attr('src'))" src="https://images.unsplash.com/photo-1549375463-8cbc18ca3f24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80">
+            <img onclick="magnify($(this).attr('src'))" src="https://images.unsplash.com/photo-1549366021-9f761d450615?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=650&q=80">
+            <img onclick="magnify($(this).attr('src'))" src="https://images.unsplash.com/photo-1549309019-a1d77aeae74f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80">
+            <img onclick="magnify($(this).attr('src'))" src="https://images.unsplash.com/photo-1547149666-769b42053e67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80">
+            <img onclick="magnify($(this).attr('src'))" src="https://images.unsplash.com/photo-1547950515-e652d0f50b1b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80">
+            <img onclick="magnify($(this).attr('src'))" src="https://images.unsplash.com/photo-1545342084-d03fe58ea023?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=633&q=80">
+        </div> -->
+        
+        <div id="trabajoGaleria">
+            <div id="trabajoItem">
+                <div>
+                    <img src="imgs/lateshift.png" >
+                </div>
+                <div >
+                    <h3>Late Shift</h3>
+                    <p>
+                        Game I made by myself: design, pixel art, programming, UI & UX, except music. I really did learn about publishing and support process and still learning. Also learned
+                        pixel art because I really like this art style for a game like this. By the moment is published on the Goole Play Store but soon will be on the AppStore
+                        <a href="https://play.google.com/store/apps/details?id=com.ParallelsGames.Late_Shift" target="blank">Android</a>
+                        <a href="">iOS(soon)</a>
+                    </p>
+                </div>
+    
+            </div>
+            <div id="trabajoItem">
+                <div>
+                    <img src="imgs/Edd01.effectsResult-uai-290x516.png">
+                </div>
+                <div>
+                    <h3>Underwater trip (Kataplum)</h3>
+                    <p>
+                        Project that consisted in realizing a "ride" in v.r. for an amousement park called "Kataplum". There where tons of challenges, one of them was integrating a hand tracking
+                        system with the Leap Motion along side withe HTC Vive Pro so the user could enjoy the ride without using controlls. Also there were 32 VR stations that must be controlled
+                        via LAN in order to sync up the ride. I programmed everything and also implemented the interaction.
+                    </p>
+                </div>
+
+            </div>
+            <div id="trabajoItem">
+                <div>
+                    <img src="imgs/el_chavo_portada01-uai-290x516.jpg" >
+                </div>
+                <div>
+                    <h3>El Chavo (El Chanfle)</h3>
+                    <p>
+                        Game that we made for oficial stores of "El Chavo" a cartoon really famous in Mexico and Latinamerica. The game consisted on a few simple mechanics about shooting
+                        water balloons and charactes with a slingshot. I created a toon shader and also the whole logic and implementation.
+                    </p>
+                </div>
+            </div>
+            <div id="trabajoItem">
+                <div>
+                    <img src="imgs/saatal.png" >
+                </div>
+                <div>
+                    <h3>Sa'atal</h3>
+                    <p>
+                      
+                        A V.R. game that we have been developing by ourselfs in Jitzu for the HTC Vive and Oculus Rift platforms. Because we wanted great graphics without too much work
+                        we used UE4 and I used BluePrints for the game logic and some basic C++.
+                    </p>
+                </div>
+            </div>
+            <div id="trabajoItem">
+                <div>
+                    <img src="imgs/zurgery_thumb.png" >
+                </div>
+                <div>
+                    <h3>Z-Urgery</h3>
+                    <p>
+                        Internal Game in Jitzu for V.R platforms but mainly for the Oculus Quest, it was a really fun game to develop cause we had to make everything "in-house". In my 
+                        personal progress it  improved my programming abilities writing AI systems like statemachines or behaviourtrees.
+                    </p>
+                </div>
+            </div>
+            <div id="trabajoItem">
+                <div>
+                    <img src="imgs/bosque_thumb.png" >
+                </div>
+                <div>
+                    <h3>Defend the woods</h3>
+                    <p>
+                       
+                        Experience created in order to be implemented on festivals or convention that many clients asked to have something fun to show in their event.
+                        The game was designed "in-house", so there was no especific requests from the clients.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <div id="contact">
+        <h1>Contact</h1>
+            <table>
+                <tr>
+                    <td>
+                        <div id="inner_div">
+                            <table id="inner_table">
+                                <tr>
+                                    <td><i class="fas fa-phone"></i> &nbsp; 55 28 46 56 53</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-at"></i> &nbsp; iosue27@gmail.com</td>
+                                </tr>
+                               
+                                <tr>
+                                    <td><i class="fas fa-map-marker-alt"></i>
+                                    <div id="address">
+                                        CDMX<br>
+                                    </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a class="social"><i class="fab fa-facebook"></i></a>
+                                        <a class="social"><i class="fab fa-twitter"></i></a>
+                                        <a class="social"><i class="fab fa-instagram"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                      <!-- <form>
+                            <input type="text" placeholder="name" required>
+                            <input type="email" placeholder="email" required><br>
+                            <textarea placeholder="your message" required rows="5"></textarea><br>
+                            <button class="btn_one">send</button>
+                        </form> 
+                        --> 
+                    </td>
+                </tr>
+            </table>
+    </div>
+    
+    <script src="index.js" type="text/javascript"></script>
+
+
+
+
+</body>
+
+
+</html>

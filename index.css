@@ -8,6 +8,17 @@ body {
     overflow-x:hidden;
     scroll-behavior: smooth;
 }
+
+/* body.en :lang(es)
+{
+    display: none;
+}
+body.es :lang(en)
+{
+    
+    display: none;
+} */
+
 #loading {
     width: 100vw;
     height: 100vh;
@@ -331,7 +342,16 @@ button:focus {
     width: 50%;
     flex-grow: 1;
     
-
+}
+#trabajoItem2
+{
+    display: flex; 
+    width: 50%;
+    flex-direction: row;
+    flex-grow: 1;
+}
+#trabajoItem2 div{
+    width: 30%;
 }
 #trabajoItem div
 {
