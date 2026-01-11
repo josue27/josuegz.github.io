@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0a0a0a;
+    background-color: hsl(263 100 50);
     color: #e0e0e0;
     line-height: 1.6;
 }
@@ -34,7 +34,7 @@ body {
 
 .header p {
     font-size: 1.2rem;
-    color: #999;
+    color: #dddddd;
 }
 
 /* Description Section */
@@ -51,14 +51,14 @@ body {
     font-size: 2rem;
     margin-bottom: 20px;
     color: #fff;
-    text-align: center;
+    text-align: left;
 }
 
 .description p {
     font-size: 1.1rem;
     color: #ccc;
-    text-align: center;
-    max-width: 800px;
+    text-align: justify;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -77,6 +77,8 @@ body {
     margin-bottom: 30px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px;
+
 }
 
 .project-panel:hover {
@@ -94,6 +96,7 @@ body {
 
 .project-content.reverse {
     flex-direction: row-reverse;
+    box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
 }
 
 .project-image {
@@ -102,12 +105,14 @@ body {
 }
 
 .project-image img,
-.project-image video {
+.project-image video,
+.project-image iframe {
     width: 100%;
-    height: 300px;
+    height: 315px;
     object-fit: cover;
     border-radius: 10px;
     border: 2px solid #333;
+    display: block;
 }
 
 .project-info {
@@ -186,6 +191,25 @@ body {
         font-size: 1rem;
     }
 }
+/* Links */
+a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #999;
+}
+
+a:visited {
+    color: #fff;
+}
+
+a:active {
+    color: #fff;
+}
 
 /* Footer */
 .footer {
@@ -193,5 +217,5 @@ body {
     padding: 40px 20px;
     margin-top: 60px;
     border-top: 2px solid #333;
-    color: #666;
+    color: #dddddd;
 }
