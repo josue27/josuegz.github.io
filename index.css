@@ -261,6 +261,41 @@ a:active {
     color: #fff;
 }
 
+/* Social links */
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    background: #121212;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    max-width: 480px;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    background: #1a1a1a;
+    color: #5E5DF0;
+}
+
+.social-links a svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+}
+
 /* Footer */
 .footer {
     text-align: center;
