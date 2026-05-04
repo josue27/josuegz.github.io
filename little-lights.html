@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Lights — Mystery Escape Game</title>
+    <style>
+        :root {
+            --bg: #000f0f;
+            --surface: #051a1a;
+            --text: #d0e8f0;
+            --text-muted: #6a9aaa;
+            --accent: #68c7ec;
+            --accent-glow: #a0dff8;
+            --nav-height: 60px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* ── Nav ─────────────────────────────── */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            height: var(--nav-height);
+            background: rgba(0,15,15,.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(104,199,236,.1);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 24px;
+            transition: box-shadow 0.3s;
+        }
+        .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.6); }
+
+        .nav-logo { font-weight: 800; font-size: 1.1rem; letter-spacing: 1px; color: var(--accent); text-decoration: none; }
+
+        .nav-links { display: flex; gap: 20px; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-muted); font-size: .85rem;
+            font-weight: 500; transition: color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+        }
+
+        /* ── Sections ────────────────────────── */
+        section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+
+        .section-tag {
+            display: inline-block; font-size: .75rem; text-transform: uppercase;
+            letter-spacing: 3px; color: var(--accent); margin-bottom: 12px; font-weight: 700;
+        }
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800;
+            margin-bottom: 24px; line-height: 1.2;
+        }
+
+        /* ── Hero ────────────────────────────── */
+        .hero {
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            background: radial-gradient(ellipse at 50% 40%, rgba(104,199,236,.08) 0%, transparent 60%), var(--bg);
+            padding-top: var(--nav-height);
+        }
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--accent) 20%, var(--accent-glow) 80%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero .subtitle { font-size: 1.2rem; color: var(--text-muted); margin: 12px 0 30px; max-width: 500px; }
+
+        .hero-stats {
+            display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+            margin-top: 20px;
+        }
+        .hero-stat {
+            background: var(--surface); border: 1px solid rgba(104,199,236,.1);
+            border-radius: 12px; padding: 12px 20px; text-align: center; min-width: 100px;
+        }
+        .hero-stat .label { font-size: .7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); }
+        .hero-stat .value { font-size: 1rem; font-weight: 700; color: var(--accent); }
+
+        .scroll-indicator {
+            margin-top: 60px; animation: bounce 2s infinite;
+            color: var(--accent); font-size: 1.5rem; opacity: .6;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* ── Premise ─────────────────────────── */
+        .premise-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;
+        }
+        @media (max-width: 768px) { .premise-grid { grid-template-columns: 1fr; } }
+
+        .premise-image {
+            aspect-ratio: 4/3; background: linear-gradient(135deg, #000a0a 0%, #051518 100%);
+            border-radius: 16px; display: flex; align-items: center; justify-content: center;
+            color: var(--accent); font-size: .9rem; border: 1px dashed rgba(104,199,236,.25);
+            position: relative; overflow: hidden;
+        }
+        .premise-image::before {
+            content: '🖼️  Imagen del bosque';
+            opacity: .4;
+        }
+        .premise-image .glow {
+            position: absolute; width: 120px; height: 120px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(104,199,236,.35) 0%, transparent 70%);
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            animation: pulse 3s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: .35; }
+            50% { transform: translate(-50%, -50%) scale(1.3); opacity: .6; }
+        }
+
+        /* ── Gameplay Loop ───────────────────── */
+        .loop-flow {
+            display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+            gap: 12px; margin-top: 40px;
+        }
+        .loop-step {
+            background: var(--surface); border: 1px solid rgba(104,199,236,.08);
+            border-radius: 14px; padding: 24px 20px; text-align: center;
+            flex: 0 1 160px; font-weight: 600; font-size: .9rem;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+        .loop-step:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.4); border-color: rgba(104,199,236,.25); }
+        .loop-step .icon { font-size: 2rem; margin-bottom: 8px; display: block; }
+        .loop-arrow { color: var(--accent); font-size: 1.5rem; font-weight: 700; }
+
+        @media (max-width: 768px) {
+            .loop-flow { flex-direction: column; }
+            .loop-arrow { transform: rotate(90deg); }
+        }
+
+        /* ── Features ────────────────────────── */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px; margin-top: 40px;
+        }
+        .feature-card {
+            background: var(--surface); border: 1px solid rgba(104,199,236,.08);
+            border-radius: 14px; padding: 28px; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,.4); border-color: rgba(104,199,236,.2); }
+        .feature-card .icon { font-size: 2.2rem; margin-bottom: 12px; display: block; }
+        .feature-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+        .feature-card p { font-size: .9rem; color: var(--text-muted); }
+
+        /* ── Zones ───────────────────────────── */
+        .zones-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px;
+        }
+        @media (max-width: 768px) { .zones-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .zones-grid { grid-template-columns: 1fr; } }
+
+        .zone-card {
+            aspect-ratio: 1; background: var(--surface); border-radius: 14px;
+            border: 1px solid rgba(104,199,236,.08); display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center; padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+        .zone-card:hover { transform: scale(1.03); box-shadow: 0 8px 28px rgba(0,0,0,.4); border-color: rgba(104,199,236,.2); }
+        .zone-card .zone-icon { font-size: 2.5rem; margin-bottom: 10px; }
+        .zone-card h4 { font-size: .95rem; }
+
+        /* ── Mechanics (2-col cards) ─────────── */
+        .mechanics-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px;
+        }
+        @media (max-width: 768px) { .mechanics-grid { grid-template-columns: 1fr; } }
+
+        .mech-card {
+            background: var(--surface); border-radius: 14px; padding: 32px;
+            border: 1px solid rgba(104,199,236,.08); display: flex; gap: 20px; align-items: flex-start;
+        }
+        .mech-card .mech-icon { font-size: 2.5rem; flex-shrink: 0; }
+        .mech-card h3 { font-size: 1.1rem; margin-bottom: 6px; }
+        .mech-card p { font-size: .9rem; color: var(--text-muted); }
+
+        /* ── Characters / End ────────────────── */
+        .char-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; margin-top: 40px;
+        }
+        @media (max-width: 768px) { .char-grid { grid-template-columns: 1fr; } }
+
+        .char-image {
+            aspect-ratio: 1; background: linear-gradient(135deg, #000a0a 0%, #051518 100%);
+            border-radius: 16px; display: flex; align-items: center; justify-content: center;
+            color: var(--accent); border: 1px dashed rgba(104,199,236,.25);
+        }
+        .char-image::before { content: '🖼️  Personaje / Golem'; opacity: .4; }
+
+        /* ── Goal banner ─────────────────────── */
+        .goal-banner {
+            background: linear-gradient(135deg, rgba(104,199,236,.1) 0%, rgba(104,199,236,.02) 100%);
+            border: 1px solid rgba(104,199,236,.15); border-radius: 16px; padding: 48px;
+            text-align: center; margin-top: 40px;
+        }
+        .goal-banner h2 { font-size: 1.6rem; margin-bottom: 12px; }
+        .totem-row { display: flex; justify-content: center; gap: 30px; margin-top: 24px; flex-wrap: wrap; }
+        .totem {
+            width: 80px; height: 80px; border-radius: 50%; border: 2px dashed var(--accent);
+            display: flex; align-items: center; justify-content: center; font-size: 2rem;
+            opacity: .35; transition: opacity 0.6s, background 0.6s, border-style 0.6s;
+        }
+        .totem.active { opacity: 1; border-style: solid; background: rgba(104,199,236,.1); }
+
+        /* ── Release Footer ──────────────────── */
+        .release {
+            text-align: center; padding: 60px 24px;
+            border-top: 1px solid rgba(104,199,236,.08);
+        }
+        .release .badge {
+            display: inline-block; background: var(--accent); color: #000f0f;
+            padding: 6px 16px; border-radius: 20px; font-size: .8rem; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase;
+        }
+
+        /* ── Back link ───────────────────────── */
+        .back-link {
+            display: inline-block; margin-top: 16px; color: var(--accent);
+            text-decoration: none; font-size: .9rem; transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--accent-glow); }
+
+        /* ── Animations ──────────────────────── */
+        section, .fade-in {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        section.visible, .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .hero { opacity: 1; transform: none; }
+
+        /* ── Menu toggle (mobile) ────────────── */
+        .menu-btn { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
+        .nav-actions { display: flex; gap: 10px; align-items: center; }
+        @media (max-width: 768px) {
+            .menu-btn { display: block; }
+            .nav-links.open {
+                display: flex; flex-direction: column; position: absolute;
+                top: var(--nav-height); left: 0; right: 0;
+                background: rgba(0,15,15,.96); padding: 16px 24px;
+                border-bottom: 1px solid rgba(104,199,236,.1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ─── Navigation ─────────────────────── -->
+    <nav class="nav" id="nav">
+        <a href="#hero" class="nav-logo">LITTLE LIGHTS</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#premise">Premisa</a></li>
+            <li><a href="#gameplay">Gameplay</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#zones">El Bosque</a></li>
+            <li><a href="#mechanics">Mecánicas</a></li>
+            <li><a href="#goal">Objetivo</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+        </div>
+    </nav>
+
+    <!-- ─── Hero (Slide 1) ─────────────────── -->
+    <section class="hero" id="hero">
+        <span class="section-tag">Slide 1</span>
+        <h1>Little Lights</h1>
+        <p class="subtitle">Juego isométrico de misterio y escape</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><span class="label">Plataformas</span><span class="value">PC</span></div>
+            <div class="hero-stat"><span class="label">Lanzamiento</span><span class="value">TBD</span></div>
+            <div class="hero-stat"><span class="label">Duración</span><span class="value">20+ min</span></div>
+            <div class="hero-stat"><span class="label">Modelo</span><span class="value">FREE</span></div>
+            <div class="hero-stat"><span class="label">Jugadores</span><span class="value">Singleplayer</span></div>
+        </div>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <!-- ─── Premise (Slide 2) ───────────────── -->
+    <section id="premise">
+        <span class="section-tag">Slide 2</span>
+        <h2 class="section-title">Premisa</h2>
+        <div class="premise-grid">
+            <div>
+                <p style="font-size:1.1rem; margin-bottom:16px;">
+                    Eres <strong>Lucas</strong>, un adolescente promedio que junto a sus amigos disfruta
+                    de su campamento de verano... hasta que ya no.
+                </p>
+                <p style="color:var(--text-muted);">
+                    Una bestia nunca antes vista ataca el campamento. Huyendo entre gritos y caos,
+                    caes en un barranco y pierdes la conciencia. Despiertas en medio del bosque,
+                    confundido y asustado. La oscuridad parece viva, pero encuentras un orbe con
+                    un agua brillosa que te defiende ante lo que vive en las tinieblas.
+                </p>
+                <p style="color:var(--text-muted); margin-top:12px;">
+                    Afortunadamente, una criatura mágica te encuentra — un <strong>"golem"</strong> cuyo
+                    sentido del humor es cuestionable pero sus intenciones son buenas. Solo hay una
+                    manera de salir del bosque: sellar a la criatura que escapó de su prisión.
+                    <strong>Rearma 3 tótems destruidos</strong>, encuentra sus piezas, escapa de la
+                    oscuridad, supera tus miedos y... ¡huye de la criatura!
+                </p>
+            </div>
+            <div class="premise-image">
+                <div class="glow"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Gameplay Loop (Slide 3) ─────────── -->
+    <section id="gameplay">
+        <span class="section-tag">Slide 3</span>
+        <h2 class="section-title">Loop de Gameplay</h2>
+        <p style="color:var(--text-muted); max-width:600px;">
+            Niveles de 6–10 minutos. Actualmente 3 niveles más un tutorial introductorio.
+            Todos los niveles avanzan la historia principal.
+        </p>
+        <div class="loop-flow">
+            <div class="loop-step"><span class="icon">🔍</span>Recolecta piezas del tótem</div>
+            <span class="loop-arrow">→</span>
+            <div class="loop-step"><span class="icon">🌿</span>Explora nueva zona</div>
+            <span class="loop-arrow">→</span>
+            <div class="loop-step"><span class="icon">🌀</span>Abre el portal</div>
+            <span class="loop-arrow">→</span>
+            <div class="loop-step"><span class="icon">⚒️</span>Rearma el tótem</div>
+            <span class="loop-arrow">→</span>
+            <div class="loop-step"><span class="icon">🏕️</span>Regresa con el golem</div>
+        </div>
+    </section>
+
+    <!-- ─── Features (Slide 4) ──────────────── -->
+    <section id="features">
+        <span class="section-tag">Slide 4</span>
+        <h2 class="section-title">Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="icon">🧩</span>
+                <h3>Niveles laberínticos</h3>
+                <p>Ponen a prueba tu memoria y conciencia espacial para orientarte en el bosque.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">💡</span>
+                <h3>Orbe mágico</h3>
+                <p>Disipa la niebla de guerra de la oscuridad y revela el camino oculto.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🏃</span>
+                <h3>Habilidades</h3>
+                <p>Escala obstáculos, pasa por debajo y cruza en equilibrio con quick-time events.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">⚔️</span>
+                <h3>Parry de ataques</h3>
+                <p>Desvía los zarpazos de la criatura con precisión de botones.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">💧</span>
+                <h3>Estanques de luz</h3>
+                <p>Recargan tu orbe mágico para mantener viva la protección.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🎯</span>
+                <h3>Ritmo dual</h3>
+                <p>Combina momentos frenéticos con exploración tranquila. Desafía mente y reflejos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── The Forest / Zones (Slides 5-6) ─── -->
+    <section id="zones">
+        <span class="section-tag">Slides 5 &amp; 6</span>
+        <h2 class="section-title">El Bosque</h2>
+        <p style="color:var(--text-muted); max-width:600px; margin-bottom:10px;">
+            El juego transcurre en un bosque mágico dividido en 4 zonas principales más
+            una introducción que establece el ambiente y enseña las mecánicas básicas.
+        </p>
+        <div class="zones-grid">
+            <div class="zone-card">
+                <span class="zone-icon">🏕️</span>
+                <h4>Base Golem</h4>
+            </div>
+            <div class="zone-card">
+                <span class="zone-icon">🌳</span>
+                <h4>Árboles Quietos</h4>
+            </div>
+            <div class="zone-card">
+                <span class="zone-icon">🕳️</span>
+                <h4>Cueva Oculta</h4>
+            </div>
+            <div class="zone-card">
+                <span class="zone-icon">⛰️</span>
+                <h4>Las Montañas</h4>
+            </div>
+        </div>
+
+        <div class="mechanics-grid" style="margin-top:40px;">
+            <div class="mech-card">
+                <span class="mech-icon">🗺️</span>
+                <div>
+                    <h3>Aprende el camino</h3>
+                    <p>Usa tu memoria para saber dónde estás y hacia dónde ir para encontrar las piezas del tótem.</p>
+                </div>
+            </div>
+            <div class="mech-card">
+                <span class="mech-icon">✨</span>
+                <div>
+                    <h3>Sigue las huellas</h3>
+                    <p>Al encontrar un tótem roto, pequeños orbes de luz te indican a dónde ir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Progression & Upgrades (Slide 7) ── -->
+    <section id="mechanics">
+        <span class="section-tag">Slide 7</span>
+        <h2 class="section-title">Progresión &amp; Mejoras</h2>
+        <div class="mechanics-grid" style="margin-top:40px;">
+            <div class="mech-card">
+                <span class="mech-icon">⏱️</span>
+                <div>
+                    <h3>Piensa rápido</h3>
+                    <p>Cuando la bestia aparece debes saber hacia dónde ir... o conocer tu destino.</p>
+                </div>
+            </div>
+            <div class="mech-card">
+                <span class="mech-icon">🔮</span>
+                <div>
+                    <h3>La luz es tu herramienta</h3>
+                    <p>No dejes que el orbe se apague: te protege de la oscuridad, revela el camino y ahuyenta al monstruo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Characters (Slide 8) ────────────── -->
+    <section id="characters">
+        <span class="section-tag">Slide 8</span>
+        <h2 class="section-title">Los Personajes</h2>
+        <div class="char-grid">
+            <div>
+                <div class="mech-card" style="margin-bottom:16px;">
+                    <span class="mech-icon">🏃‍♂️</span>
+                    <div>
+                        <h3>Corre</h3>
+                        <p>Esquiva los ataques del monstruo y piérdelo al cruzar obstáculos.</p>
+                    </div>
+                </div>
+                <div class="mech-card">
+                    <span class="mech-icon">🛡️</span>
+                    <div>
+                        <h3>Sobrevive</h3>
+                        <p>Tu orbe es tu única defensa. Administra bien la luz y mantente fuera de las sombras.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="char-image"></div>
+        </div>
+    </section>
+
+    <!-- ─── End Goal (Slide 9) ──────────────── -->
+    <section id="goal">
+        <span class="section-tag">Slide 9</span>
+        <h2 class="section-title">El Objetivo Final</h2>
+        <div class="goal-banner">
+            <p style="font-size:1.1rem; max-width:600px; margin:0 auto;">
+                Completa los <strong>3 tótems destruidos</strong> para abrir el portal y regresar al mundo.
+                Tus amigos los carismáticos <strong>"golems"</strong> te ayudarán a entender los misterios
+                de este bosque mágico.
+            </p>
+            <div class="totem-row">
+                <div class="totem active">🌀</div>
+                <div class="totem">⚒️</div>
+                <div class="totem">🔮</div>
+            </div>
+            <p style="font-size:.85rem; color:var(--text-muted); margin-top:16px;">
+                Rearma los 3 tótems → Abre el portal → Regresa a casa
+            </p>
+        </div>
+    </section>
+
+    <!-- ─── Release (Slide 10) ──────────────── -->
+    <footer class="release">
+        <span class="section-tag">Slide 10</span>
+        <h2 style="font-size:1.4rem; margin:12px 0;">Release</h2>
+        <p style="color:var(--text-muted); max-width:550px; margin:0 auto 20px;">
+            Este juego es un <strong>case study</strong> para entender diferentes herramientas de
+            <span class="badge">Unreal Engine 5</span> y conceptos de game design.
+            No está pensado como un juego completo, pero queremos mostrarlo por el simple gusto de compartirlo.
+        </p>
+        <a href="index.html" class="back-link">← Volver al portafolio</a>
+        <p style="font-size:.85rem; color:var(--text-muted); margin-top:12px;">
+            © 2026 Josue Gonzalez Zaldivar — Little Lights
+        </p>
+    </footer>
+
+    <script>
+        const nav = document.getElementById('nav');
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 10);
+
+            let current = '';
+            sections.forEach(s => {
+                if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+            });
+            navLinks.forEach(a => {
+                a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.fade-in, section').forEach(el => observer.observe(el));
+
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinksEl = document.getElementById('navLinks');
+        menuBtn.addEventListener('click', () => navLinksEl.classList.toggle('open'));
+        navLinksEl.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => navLinksEl.classList.remove('open'));
+        });
+
+        const totems = document.querySelectorAll('.totem');
+        let totemIdx = 0;
+        setInterval(() => {
+            totems.forEach((t,i) => t.classList.toggle('active', i <= totemIdx));
+            totemIdx = (totemIdx + 1) % 4;
+        }, 2000);
+    </script>
+</body>
+</html>

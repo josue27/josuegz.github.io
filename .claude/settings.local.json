@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude --bare --settings ~/.config/deepseek-claude/settings.json --debug-file /tmp/test.log --model sonnet \"Responde solo: OK\")",
+      "Bash(echo \"---EXIT CODE: $?\")",
+      "Bash(where pdftotext *)",
+      "Bash(where python *)",
+      "Bash(where node *)"
+    ]
+  }
+}
