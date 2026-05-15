@@ -8,7 +8,23 @@
 </head>
 <body>
 
-    <!-- ─── Navigation ─────────────────────── -->
+    <!-- ═══ Parallax Background Layers ═══ -->
+    <div class="parallax-bg" aria-hidden="true">
+        <div class="bg-layer bg-stars" data-parallax="0.15"></div>
+        <div class="bg-layer bg-portal" data-parallax="0.30"></div>
+        <div class="bg-layer bg-orbs-big" data-parallax="0.45">
+            <div class="big-orb orb-1"></div>
+            <div class="big-orb orb-2"></div>
+            <div class="big-orb orb-3"></div>
+            <div class="big-orb orb-4"></div>
+            <div class="big-orb orb-5"></div>
+        </div>
+    </div>
+
+    <!-- ═══ Foreground floating lights ═══ -->
+    <div class="foreground-orbs" id="foregroundOrbs" aria-hidden="true"></div>
+
+    <!-- ═══ Navigation ═══ -->
     <nav class="nav" id="nav">
         <a href="#hero" class="nav-logo">LITTLE LIGHTS</a>
         <ul class="nav-links" id="navLinks">
@@ -25,274 +41,373 @@
         </div>
     </nav>
 
-    <!-- ─── Hero (Slide 1) ─────────────────── -->
-    <section class="hero" id="hero">
-        <span class="section-tag">Slide 1</span>
-        <h1>Little Lights</h1>
-        <p class="subtitle">Juego isométrico de misterio y escape</p>
-        <div class="hero-stats">
-            <div class="hero-stat"><span class="label">Plataformas</span><span class="value">PC</span></div>
-            <div class="hero-stat"><span class="label">Lanzamiento</span><span class="value">TBD</span></div>
-            <div class="hero-stat"><span class="label">Duración</span><span class="value">20+ min</span></div>
-            <div class="hero-stat"><span class="label">Modelo</span><span class="value">FREE</span></div>
-            <div class="hero-stat"><span class="label">Jugadores</span><span class="value">Singleplayer</span></div>
-        </div>
-        <div class="scroll-indicator">↓</div>
-    </section>
+    <!-- ═══ Content ═══ -->
+    <main class="content-wrapper">
 
-    <!-- ─── Premise (Slide 2) ───────────────── -->
-    <section id="premise">
-        <span class="section-tag">Slide 2</span>
-        <h2 class="section-title">Premisa</h2>
-        <div class="premise-grid">
-            <div>
-                <p style="font-size:1.1rem; margin-bottom:16px;">
-                    Eres <strong>Lucas</strong>, un adolescente promedio que junto a sus amigos disfruta
-                    de su campamento de verano... hasta que ya no.
-                </p>
-                <p style="color:var(--text-muted);">
-                    Una bestia nunca antes vista ataca el campamento. Huyendo entre gritos y caos,
-                    caes en un barranco y pierdes la conciencia. Despiertas en medio del bosque,
-                    confundido y asustado. La oscuridad parece viva, pero encuentras un orbe con
-                    un agua brillosa que te defiende ante lo que vive en las tinieblas.
-                </p>
-                <p style="color:var(--text-muted); margin-top:12px;">
-                    Afortunadamente, una criatura mágica te encuentra — un <strong>"golem"</strong> cuyo
-                    sentido del humor es cuestionable pero sus intenciones son buenas. Solo hay una
-                    manera de salir del bosque: sellar a la criatura que escapó de su prisión.
-                    <strong>Rearma 3 tótems destruidos</strong>, encuentra sus piezas, escapa de la
-                    oscuridad, supera tus miedos y... ¡huye de la criatura!
-                </p>
+        <!-- Hero (Slide 1) -->
+        <section class="hero" id="hero">
+            <h1>Little Lights</h1>
+            <p class="subtitle">Juego isométrico de misterio y escape</p>
+            <div class="hero-stats">
+                <div class="hero-stat"><span class="label">Plataformas</span><span class="value">PC</span></div>
+                <div class="hero-stat"><span class="label">Lanzamiento</span><span class="value">TBD</span></div>
+                <div class="hero-stat"><span class="label">Duración</span><span class="value">20+ min</span></div>
+                <div class="hero-stat"><span class="label">Modelo</span><span class="value">FREE</span></div>
+                <div class="hero-stat"><span class="label">Jugadores</span><span class="value">Singleplayer</span></div>
             </div>
-            <div class="premise-image">
-                <div class="glow"></div>
-            </div>
-        </div>
-    </section>
+            <div class="scroll-indicator">↓</div>
+        </section>
 
-    <!-- ─── Gameplay Loop (Slide 3) ─────────── -->
-    <section id="gameplay">
-        <span class="section-tag">Slide 3</span>
-        <h2 class="section-title">Loop de Gameplay</h2>
-        <p style="color:var(--text-muted); max-width:600px;">
-            Niveles de 6–10 minutos. Actualmente 3 niveles más un tutorial introductorio.
-            Todos los niveles avanzan la historia principal.
-        </p>
-        <div class="loop-flow">
-            <div class="loop-step"><span class="icon">🔍</span>Recolecta piezas del tótem</div>
-            <span class="loop-arrow">→</span>
-            <div class="loop-step"><span class="icon">🌿</span>Explora nueva zona</div>
-            <span class="loop-arrow">→</span>
-            <div class="loop-step"><span class="icon">🌀</span>Abre el portal</div>
-            <span class="loop-arrow">→</span>
-            <div class="loop-step"><span class="icon">⚒️</span>Rearma el tótem</div>
-            <span class="loop-arrow">→</span>
-            <div class="loop-step"><span class="icon">🏕️</span>Regresa con el golem</div>
-        </div>
-    </section>
-
-    <!-- ─── Features (Slide 4) ──────────────── -->
-    <section id="features">
-        <span class="section-tag">Slide 4</span>
-        <h2 class="section-title">Features</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <span class="icon">🧩</span>
-                <h3>Niveles laberínticos</h3>
-                <p>Ponen a prueba tu memoria y conciencia espacial para orientarte en el bosque.</p>
-            </div>
-            <div class="feature-card">
-                <span class="icon">💡</span>
-                <h3>Orbe mágico</h3>
-                <p>Disipa la niebla de guerra de la oscuridad y revela el camino oculto.</p>
-            </div>
-            <div class="feature-card">
-                <span class="icon">🏃</span>
-                <h3>Habilidades</h3>
-                <p>Escala obstáculos, pasa por debajo y cruza en equilibrio con quick-time events.</p>
-            </div>
-            <div class="feature-card">
-                <span class="icon">⚔️</span>
-                <h3>Parry de ataques</h3>
-                <p>Desvía los zarpazos de la criatura con precisión de botones.</p>
-            </div>
-            <div class="feature-card">
-                <span class="icon">💧</span>
-                <h3>Estanques de luz</h3>
-                <p>Recargan tu orbe mágico para mantener viva la protección.</p>
-            </div>
-            <div class="feature-card">
-                <span class="icon">🎯</span>
-                <h3>Ritmo dual</h3>
-                <p>Combina momentos frenéticos con exploración tranquila. Desafía mente y reflejos.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ─── The Forest / Zones (Slides 5-6) ─── -->
-    <section id="zones">
-        <span class="section-tag">Slides 5 &amp; 6</span>
-        <h2 class="section-title">El Bosque</h2>
-        <p style="color:var(--text-muted); max-width:600px; margin-bottom:10px;">
-            El juego transcurre en un bosque mágico dividido en 4 zonas principales más
-            una introducción que establece el ambiente y enseña las mecánicas básicas.
-        </p>
-        <div class="zones-grid">
-            <div class="zone-card">
-                <span class="zone-icon">🏕️</span>
-                <h4>Base Golem</h4>
-            </div>
-            <div class="zone-card">
-                <span class="zone-icon">🌳</span>
-                <h4>Árboles Quietos</h4>
-            </div>
-            <div class="zone-card">
-                <span class="zone-icon">🕳️</span>
-                <h4>Cueva Oculta</h4>
-            </div>
-            <div class="zone-card">
-                <span class="zone-icon">⛰️</span>
-                <h4>Las Montañas</h4>
-            </div>
-        </div>
-
-        <div class="mechanics-grid" style="margin-top:40px;">
-            <div class="mech-card">
-                <span class="mech-icon">🗺️</span>
+        <!-- Premise (Slide 2) -->
+        <section id="premise">
+            <h2 class="section-title">Premisa</h2>
+            <div class="premise-grid">
                 <div>
-                    <h3>Aprende el camino</h3>
-                    <p>Usa tu memoria para saber dónde estás y hacia dónde ir para encontrar las piezas del tótem.</p>
+                    <p style="font-size:1.1rem; margin-bottom:16px;">
+                        Eres <strong>Lucas</strong>, un adolescente promedio que junto a sus amigos disfruta
+                        de su campamento de verano... hasta que ya no.
+                    </p>
+                    <p style="color:var(--text-muted);">
+                        Una bestia nunca antes vista ataca el campamento. Huyendo entre gritos y caos,
+                        caes en un barranco y pierdes la conciencia. Despiertas en medio del bosque,
+                        confundido y asustado. La oscuridad parece viva, pero encuentras un orbe con
+                        un agua brillosa que te defiende ante lo que vive en las tinieblas.
+                    </p>
+                    <p style="color:var(--text-muted); margin-top:12px;">
+                        Afortunadamente, una criatura mágica te encuentra — un <strong>"golem"</strong> cuyo
+                        sentido del humor es cuestionable pero sus intenciones son buenas. Solo hay una
+                        manera de salir del bosque: sellar a la criatura que escapó de su prisión.
+                        <strong>Rearma 3 tótems destruidos</strong>, encuentra sus piezas, escapa de la
+                        oscuridad, supera tus miedos y... ¡huye de la criatura!
+                    </p>
+                </div>
+                <div class="premise-image">
+                    <img src="images/little-lights/lucas-herido.png" alt="Lucas herido en el bosque">
                 </div>
             </div>
-            <div class="mech-card">
-                <span class="mech-icon">✨</span>
-                <div>
-                    <h3>Sigue las huellas</h3>
-                    <p>Al encontrar un tótem roto, pequeños orbes de luz te indican a dónde ir.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ─── Progression & Upgrades (Slide 7) ── -->
-    <section id="mechanics">
-        <span class="section-tag">Slide 7</span>
-        <h2 class="section-title">Progresión &amp; Mejoras</h2>
-        <div class="mechanics-grid" style="margin-top:40px;">
-            <div class="mech-card">
-                <span class="mech-icon">⏱️</span>
+        <!-- Gameplay Loop (Slide 3) -->
+        <section id="gameplay">
+            <h2 class="section-title">Loop de Gameplay</h2>
+            <div class="gameplay-layout">
                 <div>
-                    <h3>Piensa rápido</h3>
-                    <p>Cuando la bestia aparece debes saber hacia dónde ir... o conocer tu destino.</p>
+                    <p style="color:var(--text-muted); margin-bottom:20px;">
+                        Niveles de 6–10 minutos. Actualmente 3 niveles más un tutorial introductorio.
+                        Todos los niveles avanzan la historia principal.
+                    </p>
+                    <div class="loop-flow">
+                        <div class="loop-step"><span class="icon">🔍</span>Recolecta piezas del tótem</div>
+                        <span class="loop-arrow">→</span>
+                        <div class="loop-step"><span class="icon">🌿</span>Explora nueva zona</div>
+                        <span class="loop-arrow">→</span>
+                        <div class="loop-step"><span class="icon">🌀</span>Abre el portal</div>
+                        <span class="loop-arrow">→</span>
+                        <div class="loop-step"><span class="icon">⚒️</span>Rearma el tótem</div>
+                        <span class="loop-arrow">→</span>
+                        <div class="loop-step"><span class="icon">🏕️</span>Regresa con el golem</div>
+                    </div>
+                </div>
+                <div class="gameplay-image">
+                    <img src="images/little-lights/totem.png" alt="Tótem mágico">
                 </div>
             </div>
-            <div class="mech-card">
-                <span class="mech-icon">🔮</span>
-                <div>
-                    <h3>La luz es tu herramienta</h3>
-                    <p>No dejes que el orbe se apague: te protege de la oscuridad, revela el camino y ahuyenta al monstruo.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ─── Characters (Slide 8) ────────────── -->
-    <section id="characters">
-        <span class="section-tag">Slide 8</span>
-        <h2 class="section-title">Los Personajes</h2>
-        <div class="char-grid">
-            <div>
-                <div class="mech-card" style="margin-bottom:16px;">
-                    <span class="mech-icon">🏃‍♂️</span>
+        <!-- Features (Slide 4) -->
+        <section id="features">
+            <h2 class="section-title">Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="icon">🧩</span>
+                    <h3>Niveles laberínticos</h3>
+                    <p>Ponen a prueba tu memoria y conciencia espacial para orientarte en el bosque.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">💡</span>
+                    <h3>Orbe mágico</h3>
+                    <p>Disipa la niebla de guerra de la oscuridad y revela el camino oculto.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🏃</span>
+                    <h3>Habilidades</h3>
+                    <p>Escala obstáculos, pasa por debajo y cruza en equilibrio con quick-time events.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">⚔️</span>
+                    <h3>Parry de ataques</h3>
+                    <p>Desvía los zarpazos de la criatura con precisión de botones.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">💧</span>
+                    <h3>Estanques de luz</h3>
+                    <p>Recargan tu orbe mágico para mantener viva la protección.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🎯</span>
+                    <h3>Ritmo dual</h3>
+                    <p>Combina momentos frenéticos con exploración tranquila. Desafía mente y reflejos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Forest / Zones (Slides 5-6) -->
+        <section id="zones">
+            <h2 class="section-title">El Bosque</h2>
+            <p style="color:var(--text-muted); max-width:600px; margin-bottom:10px;">
+                El juego transcurre en un bosque mágico dividido en 4 zonas principales más
+                una introducción que establece el ambiente y enseña las mecánicas básicas.
+            </p>
+            <div class="zones-grid">
+                <div class="zone-card">
+                    <span class="zone-icon">🏕️</span>
+                    <h4>Base Golem</h4>
+                </div>
+                <div class="zone-card">
+                    <span class="zone-icon">🌳</span>
+                    <h4>Árboles Quietos</h4>
+                </div>
+                <div class="zone-card">
+                    <span class="zone-icon">🕳️</span>
+                    <h4>Cueva Oculta</h4>
+                </div>
+                <div class="zone-card">
+                    <span class="zone-icon">⛰️</span>
+                    <h4>Las Montañas</h4>
+                </div>
+            </div>
+
+            <div class="mechanics-grid" style="margin-top:40px;">
+                <div class="mech-card">
+                    <span class="mech-icon">🗺️</span>
                     <div>
-                        <h3>Corre</h3>
-                        <p>Esquiva los ataques del monstruo y piérdelo al cruzar obstáculos.</p>
+                        <h3>Aprende el camino</h3>
+                        <p>Usa tu memoria para saber dónde estás y hacia dónde ir para encontrar las piezas del tótem.</p>
                     </div>
                 </div>
                 <div class="mech-card">
-                    <span class="mech-icon">🛡️</span>
+                    <span class="mech-icon">✨</span>
                     <div>
-                        <h3>Sobrevive</h3>
-                        <p>Tu orbe es tu única defensa. Administra bien la luz y mantente fuera de las sombras.</p>
+                        <h3>Sigue las huellas</h3>
+                        <p>Al encontrar un tótem roto, pequeños orbes de luz te indican a dónde ir.</p>
                     </div>
                 </div>
             </div>
-            <div class="char-image"></div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ─── End Goal (Slide 9) ──────────────── -->
-    <section id="goal">
-        <span class="section-tag">Slide 9</span>
-        <h2 class="section-title">El Objetivo Final</h2>
-        <div class="goal-banner">
-            <p style="font-size:1.1rem; max-width:600px; margin:0 auto;">
-                Completa los <strong>3 tótems destruidos</strong> para abrir el portal y regresar al mundo.
-                Tus amigos los carismáticos <strong>"golems"</strong> te ayudarán a entender los misterios
-                de este bosque mágico.
-            </p>
-            <div class="totem-row">
-                <div class="totem active">🌀</div>
-                <div class="totem">⚒️</div>
-                <div class="totem">🔮</div>
+        <!-- Progression & Upgrades (Slide 7) -->
+        <section id="mechanics">
+            <h2 class="section-title">Progresión &amp; Mejoras</h2>
+            <div class="mechanics-grid" style="margin-top:40px;">
+                <div class="mech-card">
+                    <span class="mech-icon">⏱️</span>
+                    <div>
+                        <h3>Piensa rápido</h3>
+                        <p>Cuando la bestia aparece debes saber hacia dónde ir... o conocer tu destino.</p>
+                    </div>
+                </div>
+                <div class="mech-card">
+                    <span class="mech-icon">🔮</span>
+                    <div>
+                        <h3>La luz es tu herramienta</h3>
+                        <p>No dejes que el orbe se apague: te protege de la oscuridad, revela el camino y ahuyenta al monstruo.</p>
+                    </div>
+                </div>
             </div>
-            <p style="font-size:.85rem; color:var(--text-muted); margin-top:16px;">
-                Rearma los 3 tótems → Abre el portal → Regresa a casa
-            </p>
-        </div>
-    </section>
+        </section>
 
-    <!-- ─── Release (Slide 10) ──────────────── -->
-    <footer class="release">
-        <span class="section-tag">Slide 10</span>
-        <h2 style="font-size:1.4rem; margin:12px 0;">Release</h2>
-        <p style="color:var(--text-muted); max-width:550px; margin:0 auto 20px;">
-            Este juego es un <strong>case study</strong> para entender diferentes herramientas de
-            <span class="badge">Unreal Engine 5</span> y conceptos de game design.
-            No está pensado como un juego completo, pero queremos mostrarlo por el simple gusto de compartirlo.
-        </p>
-        <a href="index.html" class="back-link">← Volver al portafolio</a>
-        <p style="font-size:.85rem; color:var(--text-muted); margin-top:12px;">
-            © 2026 Josue Gonzalez Zaldivar — Little Lights
-        </p>
-    </footer>
+        <!-- Characters (Slide 8) -->
+        <section id="characters">
+            <h2 class="section-title">Los Personajes</h2>
+            <div class="char-grid">
+                <div>
+                    <div class="mech-card" style="margin-bottom:16px;">
+                        <span class="mech-icon">🏃‍♂️</span>
+                        <div>
+                            <h3>Corre</h3>
+                            <p>Esquiva los ataques del monstruo y piérdelo al cruzar obstáculos.</p>
+                        </div>
+                    </div>
+                    <div class="mech-card">
+                        <span class="mech-icon">🛡️</span>
+                        <div>
+                            <h3>Sobrevive</h3>
+                            <p>Tu orbe es tu única defensa. Administra bien la luz y mantente fuera de las sombras.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="char-image">
+                    <img src="images/little-lights/golems.png" alt="Golems del bosque">
+                </div>
+            </div>
+        </section>
+
+        <!-- End Goal (Slide 9) -->
+        <section id="goal">
+            <h2 class="section-title">El Objetivo Final</h2>
+            <div class="goal-banner">
+                <p style="font-size:1.1rem; max-width:600px; margin:0 auto;">
+                    Completa los <strong>3 tótems destruidos</strong> para abrir el portal y regresar al mundo.
+                    Tus amigos los carismáticos <strong>"golems"</strong> te ayudarán a entender los misterios
+                    de este bosque mágico.
+                </p>
+                <div class="totem-row">
+                    <div class="totem active">🌀</div>
+                    <div class="totem">⚒️</div>
+                    <div class="totem">🔮</div>
+                </div>
+                <p style="font-size:.85rem; color:var(--text-muted); margin-top:16px;">
+                    Rearma los 3 tótems → Abre el portal → Regresa a casa
+                </p>
+            </div>
+        </section>
+
+        <!-- Release (Slide 10) -->
+        <footer class="release">
+            <h2 style="font-size:1.4rem; margin:12px 0;">Release</h2>
+            <p style="color:var(--text-muted); max-width:550px; margin:0 auto 20px;">
+                Este juego es un <strong>case study</strong> para entender diferentes herramientas de
+                <span class="badge">Unreal Engine 5</span> y conceptos de game design.
+                No está pensado como un juego completo, pero queremos mostrarlo por el simple gusto de compartirlo.
+            </p>
+            <a href="index.html" class="back-link">← Volver al portafolio</a>
+            <p style="font-size:.85rem; color:var(--text-muted); margin-top:12px;">
+                © 2026 Josue Gonzalez Zaldivar — Little Lights
+            </p>
+        </footer>
+
+    </main>
 
     <script>
-        const nav = document.getElementById('nav');
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-links a');
+        /* ═══ Generate foreground floating orbs ═══ */
+        (function() {
+            var container = document.getElementById('foregroundOrbs');
+            var count = 18;
+            var frag = document.createDocumentFragment();
+            for (var i = 0; i < count; i++) {
+                var orb = document.createElement('div');
+                orb.className = 'float-orb';
+                var size = 4 + Math.random() * 14;
+                orb.style.width = size + 'px';
+                orb.style.height = size + 'px';
+                orb.style.left = Math.random() * 100 + '%';
+                orb.style.top = Math.random() * 100 + '%';
+                orb.style.animationDelay = -(Math.random() * 8) + 's';
+                orb.style.animationDuration = (5 + Math.random() * 8) + 's';
+                frag.appendChild(orb);
+            }
+            container.appendChild(frag);
+        })();
 
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 10);
+        /* ═══ Scroll parallax for background layers ═══ */
+        (function() {
+            var layers = document.querySelectorAll('[data-parallax]');
+            var ticking = false;
 
-            let current = '';
-            sections.forEach(s => {
-                if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+            function update() {
+                var scrollY = window.scrollY;
+                for (var i = 0; i < layers.length; i++) {
+                    var speed = parseFloat(layers[i].dataset.parallax);
+                    layers[i].style.transform = 'translateY(' + (scrollY * speed) + 'px)';
+                }
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(update);
+                    ticking = true;
+                }
+            }, { passive: true });
+        })();
+
+        /* ═══ Mouse parallax for foreground orbs ═══ */
+        (function() {
+            var orbs = document.getElementById('foregroundOrbs');
+            if (!orbs) return;
+            var ticking = false;
+            var mouseX = 0, mouseY = 0;
+            var currentX = 0, currentY = 0;
+
+            window.addEventListener('mousemove', function(e) {
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+                if (!ticking) {
+                    requestAnimationFrame(function() {
+                        currentX += (mouseX - currentX) * 0.05;
+                        currentY += (mouseY - currentY) * 0.05;
+                        orbs.style.transform = 'translate(' + (currentX * 12) + 'px, ' + (currentY * 12) + 'px)';
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+        })();
+
+        /* ═══ Nav scroll spy ═══ */
+        (function() {
+            var nav = document.getElementById('nav');
+            var sections = document.querySelectorAll('section[id]');
+            var navLinks = document.querySelectorAll('.nav-links a');
+
+            window.addEventListener('scroll', function() {
+                nav.classList.toggle('scrolled', window.scrollY > 10);
+
+                var current = '';
+                for (var i = 0; i < sections.length; i++) {
+                    if (window.scrollY >= sections[i].offsetTop - 120) {
+                        current = sections[i].getAttribute('id');
+                    }
+                }
+                for (var j = 0; j < navLinks.length; j++) {
+                    var href = navLinks[j].getAttribute('href');
+                    navLinks[j].classList.toggle('active', href === '#' + current);
+                }
+            }, { passive: true });
+        })();
+
+        /* ═══ Fade-in on scroll ═══ */
+        (function() {
+            var observer = new IntersectionObserver(function(entries) {
+                for (var i = 0; i < entries.length; i++) {
+                    if (entries[i].isIntersecting) {
+                        entries[i].target.classList.add('visible');
+                    }
+                }
+            }, { threshold: 0.15 });
+
+            var targets = document.querySelectorAll('.fade-in, section');
+            for (var i = 0; i < targets.length; i++) {
+                observer.observe(targets[i]);
+            }
+        })();
+
+        /* ═══ Mobile menu toggle ═══ */
+        (function() {
+            var menuBtn = document.getElementById('menuBtn');
+            var navLinksEl = document.getElementById('navLinks');
+            menuBtn.addEventListener('click', function() {
+                navLinksEl.classList.toggle('open');
             });
-            navLinks.forEach(a => {
-                a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-            });
-        });
+            var links = navLinksEl.querySelectorAll('a');
+            for (var i = 0; i < links.length; i++) {
+                links[i].addEventListener('click', function() {
+                    navLinksEl.classList.remove('open');
+                });
+            }
+        })();
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.15 });
-
-        document.querySelectorAll('.fade-in, section').forEach(el => observer.observe(el));
-
-        const menuBtn = document.getElementById('menuBtn');
-        const navLinksEl = document.getElementById('navLinks');
-        menuBtn.addEventListener('click', () => navLinksEl.classList.toggle('open'));
-        navLinksEl.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => navLinksEl.classList.remove('open'));
-        });
-
-        const totems = document.querySelectorAll('.totem');
-        let totemIdx = 0;
-        setInterval(() => {
-            totems.forEach((t,i) => t.classList.toggle('active', i <= totemIdx));
-            totemIdx = (totemIdx + 1) % 4;
-        }, 2000);
+        /* ═══ Totem animation ═══ */
+        (function() {
+            var totems = document.querySelectorAll('.totem');
+            var idx = 0;
+            setInterval(function() {
+                for (var i = 0; i < totems.length; i++) {
+                    totems[i].classList.toggle('active', i <= idx);
+                }
+                idx = (idx + 1) % 4;
+            }, 2000);
+        })();
     </script>
 </body>
 </html>
